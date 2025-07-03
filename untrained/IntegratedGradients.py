@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from typing import List
 
-def integrated_gradients(inputs: torch.Tensor, model: nn.Module, target_class, baseline=None,steps = 70):
+def integrated_gradients(inputs: torch.Tensor, model: nn.Module, target_class, baseline=None,steps = 50):
     if baseline is None:
         baseline = torch.zeros_like(inputs)
     

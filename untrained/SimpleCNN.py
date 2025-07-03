@@ -37,7 +37,7 @@ def train_model():
     opt = optim.Adam(model.parameters(), lr=0.001)
 
     model.train()
-    epochs = 5
+    epochs = 10
 
     for epoch in range(epochs):
         running_loss = 0.0

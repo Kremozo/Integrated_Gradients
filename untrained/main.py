@@ -16,7 +16,7 @@ def main():
         print("Loaded trained state")
     except FileNotFoundError:
         print("no model state found, training")
-        model = train_model()
+        model = train_model() 
     
     model.eval
 
@@ -28,10 +28,10 @@ def main():
 
     random_idx = random.randint(0, len(testset)-1)
 
-    img_tensor, label = testset[1]
+    img_tensor, label = testset[random_idx]
     img_tensor = img_tensor.unsqueeze(0)
 
-    original_img = testset.data[1]
+    original_img = testset.data[random_idx]
     original_img = Image.fromarray(original_img)
 
     with torch.no_grad():
@@ -39,7 +39,7 @@ def main():
         pred_class = output.argmax(dim=1).item()
         print(f"Predicted class: {pred_class}, True class: {label}")
 
-    attributions = integrated_gradients(img_tensor, model, pred_class, baseline=torch.zeros_like(img_tensor), steps=50)
+    attributions = integrated_gradients(img_tensor, model, pred_class, baseline=torch.zeros_like(img_tensor), steps=100)
 
     visualize_attributions(original_img, attributions)
 
